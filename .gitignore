@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# pytest
+.pytest_cache/
+
+# Hugging Face cache 
+.cache/
+~/.cache/huggingface/
+.huggingface/
+
+# artifacts and models
+artifacts/
+models/
+data/
+
+#MLflow
+mlflow.db
+mlruns/
+
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/

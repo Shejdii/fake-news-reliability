@@ -1,0 +1,14 @@
+datasets<4.0.0
+pandas
+numpy
+scikit-learn
+mlflow
+
+pytest
+black
+pylint
+
+transformers
+torch
+accelerate
+
