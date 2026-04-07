@@ -10,7 +10,6 @@ from src.data.load_data import load_fake_news_data
 from src.features.baseline_features import transform_texts_with_vectorizer
 from src.preprocessing.preprocess import preprocess_dataset
 
-
 BASELINE_MODEL_PATH = "artifacts/baseline/model.joblib"
 BASELINE_VECTORIZER_PATH = "artifacts/baseline/vectorizer.joblib"
 DISTILBERT_MODEL_PATH = "artifacts/distilbert/model"
@@ -39,9 +38,7 @@ def print_summary(model_name, y_true, y_pred, bands):
         f1 = f1_score(y_true_band, y_pred_band, average="weighted")
 
         print(
-            f"{band}: count={count}, "
-            f"accuracy={acc:.4f}, "
-            f"f1_weighted={f1:.4f}"
+            f"{band}: count={count}, " f"accuracy={acc:.4f}, " f"f1_weighted={f1:.4f}"
         )
 
 

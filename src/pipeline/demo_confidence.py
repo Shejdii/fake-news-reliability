@@ -8,7 +8,6 @@ from src.data.load_data import load_fake_news_data
 from src.features.baseline_features import transform_texts_with_vectorizer
 from src.preprocessing.preprocess import preprocess_dataset
 
-
 BASELINE_MODEL_PATH = "artifacts/baseline/model.joblib"
 BASELINE_VECTORIZER_PATH = "artifacts/baseline/vectorizer.joblib"
 

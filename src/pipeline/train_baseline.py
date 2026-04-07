@@ -11,7 +11,6 @@ from src.features.baseline_features import prepare_baseline_features
 from src.models.baseline_model import train_baseline_model
 from src.preprocessing.preprocess import preprocess_dataset
 
-
 warnings.filterwarnings("ignore", message="Saving scikit-learn models in the pickle")
 
 BASELINE_ARTIFACTS_DIR = Path("artifacts/baseline")

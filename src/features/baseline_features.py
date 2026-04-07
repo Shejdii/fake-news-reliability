@@ -24,8 +24,10 @@ def prepare_baseline_features(
 
     return x_train, x_test, y_train, y_test, vectorizer
 
+
 def transform_texts_with_vectorizer(texts, vectorizer):
     return vectorizer.transform(texts)
+
 
 def transform_texts_with_vectorizer(texts, vectorizer):
     return vectorizer.transform(texts)
