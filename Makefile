@@ -1,5 +1,4 @@
 install:
-
 	pip install -r requirements.txt
 
 data:
@@ -7,6 +6,15 @@ data:
 
 baseline:
 	python -m src.pipeline.train_baseline
+
+distilbert:
+	python -m src.pipeline.train_distilbert
+
+demo-confidence:
+	python -m src.pipeline.demo_confidence
+
+compare-confidence:
+	python -m src.pipeline.compare_confidence
 
 test:
 	pytest -v -q
@@ -23,12 +31,21 @@ test-contract:
 test-data:
 	pytest -q tests/test_data_smoke.py tests/test_data_contract.py
 
+test-confidence:
+	pytest -q tests/test_confidence_utils.py tests/test_baseline_confidence.py tests/test_distilbert_confidence.py
+
+debug-data:
+	python -m src.pipeline.debug_data
+
 lint:
-	pylint src || true
+	-pylint src
 
 format:
 	black .
 
-check: format lint test
+format-check:
+	black --check .
 
-pipeline: check
+check: format-check lint test
+
+pipeline: check data baseline

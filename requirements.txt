@@ -11,4 +11,3 @@ pylint
 transformers
 torch
 accelerate
-

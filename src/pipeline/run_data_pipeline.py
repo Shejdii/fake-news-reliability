@@ -25,11 +25,14 @@ def run_data_pipeline():
 
     print("\n=== LABEL DISTRIBUTION (train) ===")
     labels = [x["label"] for x in train_data]
-    print({
-        0: labels.count(0),
-        1: labels.count(1),
-        2: labels.count(2),
-    })
+    print(
+        {
+            0: labels.count(0),
+            1: labels.count(1),
+            2: labels.count(2),
+        }
+    )
+
 
 if __name__ == "__main__":
     run_data_pipeline()
