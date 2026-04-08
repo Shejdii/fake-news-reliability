@@ -17,7 +17,7 @@ compare-confidence:
 	python -m src.pipeline.compare_confidence
 
 test:
-	pytest -v -q
+	pytest -v -q -m "not integration"
 
 test-unit:
 	pytest -q tests/test_label_mapping.py

@@ -1,0 +1,15 @@
+{
+  "train": [
+    {"statement": "The sky is green.", "label": 0},
+    {"statement": "Water boils at 100C.", "label": 5},
+    {"statement": "The Earth is flat.", "label": 1}
+  ],
+  "test": [
+    {"statement": "Paris is in France.", "label": 5},
+    {"statement": "Vaccines cause magnetism.", "label": 0}
+  ],
+  "validation": [
+    {"statement": "This is half true.", "label": 2},
+    {"statement": "The moon is made of cheese.", "label": 0}
+  ]
+}

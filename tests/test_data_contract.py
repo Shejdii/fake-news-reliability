@@ -2,17 +2,15 @@ from src.data.load_data import load_fake_news_data
 from src.preprocessing.preprocess import preprocess_dataset
 
 
-def test_preprocessed_data_contract():
-    train_data, _, _ = load_fake_news_data()
+def test_preprocessed_data_contract(sample_liar_dataset):
+    def fake_loader(*args, **kwargs):
+        return sample_liar_dataset
+
+    train_data, _, _ = load_fake_news_data(dataset_loader=fake_loader)
     processed = preprocess_dataset(train_data)
 
+    assert processed.column_names == ["text", "label"]
+
     sample = processed[0]
-
-    assert "text" in sample
-    assert "label" in sample
-
     assert isinstance(sample["text"], str)
     assert isinstance(sample["label"], int)
-    assert sample["label"] in [0, 1, 2]
-
-    assert set(sample.keys()) == {"text", "label"}

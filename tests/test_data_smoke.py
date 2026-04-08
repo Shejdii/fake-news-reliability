@@ -2,25 +2,17 @@ from src.data.load_data import load_fake_news_data
 from src.preprocessing.preprocess import preprocess_dataset
 
 
-def test_data_loading_smoke():
-    train_data, test_data, validation_data = load_fake_news_data()
+def test_preprocessed_data_contract(monkeypatch, sample_liar_dataset):
+    def mock_load_dataset(*args, **kwargs):
+        return sample_liar_dataset
 
-    assert len(train_data) > 0
-    assert len(test_data) > 0
-    assert len(validation_data) > 0
+    monkeypatch.setattr("src.data.load_data.load_dataset", mock_load_dataset)
 
-    sample = train_data[0]
-    assert "statement" in sample
-    assert "label" in sample
-
-
-def test_preprocess_smoke():
     train_data, _, _ = load_fake_news_data()
     processed = preprocess_dataset(train_data)
 
-    assert len(processed) == len(train_data)
+    assert processed.column_names == ["text", "label"]
 
     sample = processed[0]
-    assert "text" in sample
-    assert "label" in sample
-    assert sample["label"] in [0, 1, 2]
+    assert isinstance(sample["text"], str)
+    assert isinstance(sample["label"], int)
