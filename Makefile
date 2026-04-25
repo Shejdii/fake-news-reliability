@@ -48,4 +48,4 @@ format-check:
 
 check: format-check lint test
 
-pipeline: check data baseline
+pipeline: check data baselinepipeline distilbertpipeline

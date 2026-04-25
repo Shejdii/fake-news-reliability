@@ -1,6 +1,6 @@
 import mlflow
 import numpy as np
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from transformers import DataCollatorWithPadding, Trainer, TrainingArguments
 
 from src.data.load_data import load_fake_news_data
@@ -15,7 +15,14 @@ def compute_metrics(eval_pred):
 
     return {
         "accuracy": accuracy_score(labels, predictions),
-        "f1": f1_score(labels, predictions, average="weighted"),
+        "macro_f1": f1_score(labels, predictions, average="macro"),
+        "weighted_f1": f1_score(labels, predictions, average="weighted"),
+        "precision_macro": precision_score(
+            labels, predictions, average="macro", zero_division=0
+        ),
+        "recall_macro": recall_score(
+            labels, predictions, average="macro", zero_division=0
+        ),
     }
 
 
@@ -78,7 +85,7 @@ def train():
         learning_rate=2e-5,
         weight_decay=0.01,
         load_best_model_at_end=True,
-        metric_for_best_model="f1",
+        metric_for_best_model="macro_f1",
         greater_is_better=True,
         report_to="none",
     )
@@ -109,13 +116,18 @@ def train():
         mlflow.log_metrics(
             {
                 "eval_loss": float(metrics["eval_loss"]),
-                "eval_accuracy": float(metrics["eval_accuracy"]),
-                "eval_f1": float(metrics["eval_f1"]),
+                "accuracy": float(metrics["eval_accuracy"]),
+                "macro_f1": float(metrics["eval_macro_f1"]),
+                "weighted_f1": float(metrics["eval_weighted_f1"]),
+                "precision_macro": float(metrics["eval_precision_macro"]),
+                "recall_macro": float(metrics["eval_recall_macro"]),
             }
         )
 
-        trainer.save_model("artifacts/distilbert/model")
-        tokenizer.save_pretrained("artifacts/distilbert/tokenizer")
+        model_dir = "artifacts/models/distilbert_model"
+
+        trainer.save_model(model_dir)
+        tokenizer.save_pretrained(model_dir)
 
 
 if __name__ == "__main__":

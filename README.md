@@ -76,3 +76,9 @@ Shows:
 * experiment tracking (MLflow)
 * inference layer design (confidence-aware predictions)
 * real-world issue: confidence calibration
+
+## Testing Strategy
+
+- Unit tests run offline using injected dataset loader
+- Integration tests (real HF dataset) are marked separately
+- CI runs only non-integration tests for stability
