@@ -38,11 +38,13 @@ This project introduces a **confidence layer** on top of standard classification
 ## 🧠 Models
 
 ### Baseline
+
 - TF-IDF + Logistic Regression  
 - fast and interpretable  
 - limited semantic understanding  
 
 ### Transformer
+
 - DistilBERT (fine-tuned)  
 - captures contextual meaning  
 - higher accuracy  
@@ -75,10 +77,10 @@ This makes uncertainty explicit instead of hidden.
 
 ## 📊 Results (validation subset)
 
-| Model        | Accuracy |
-|--------------|---------|
-| Baseline     | ~0.42   |
-| DistilBERT   | ~0.59   |
+| Model      | Accuracy |
+|------------|----------|
+| Baseline   | ~0.42    |
+| DistilBERT | ~0.59    |
 
 ### Key insight
 
