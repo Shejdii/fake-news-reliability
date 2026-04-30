@@ -77,22 +77,16 @@ This makes uncertainty explicit instead of hidden.
 
 ## 📊 Results (validation subset)
 
-## 🧪 Example Output
+| Model      | Accuracy | F1 macro | F1 weighted |
+|------------|----------|----------|-------------|
+| Baseline   | 0.4427   | 0.3964   | 0.4587      |
+| DistilBERT | 0.5933   | 0.3346   | 0.5156      |
 
-Example prediction comparison:
+### Observations
 
-Baseline:
-- label: TRUE
-- confidence: 0.91
-- result: WRONG
-
-DistilBERT:
-- label: FALSE
-- confidence: 0.58
-- result: CORRECT
-
-Insight:
-Higher confidence does not guarantee correctness.
+- DistilBERT significantly improves **accuracy**
+- However, **macro F1 remains relatively low**, indicating class imbalance / harder minority classes
+- Confidence scores are not calibrated and require further work
 
 ### Key insight
 
@@ -106,8 +100,6 @@ Observed:
 This reflects a real-world ML issue:
 
 > reliability ≠ accuracy
-
----
 
 ## ⚙️ Pipeline
 
