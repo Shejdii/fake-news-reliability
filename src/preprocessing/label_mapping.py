@@ -1,11 +1,4 @@
-# Labeling data for fake news reliability classification
-# This module provides a mapping of labels for the fake news reliability classification task.
-# Define label mapping for fake news reliability classification from the LIAR dataset
-# dataset from loading data module
-
-# Define label mapping for LIAR dataset
-
-# Label mapping for LIAR dataset: 6 classes -> 3 classes
+"""Map original LIAR labels into project-level reliability classes."""
 
 LABEL_MAP = {
     0: 0,  # pants-fire -> FALSE
@@ -18,6 +11,7 @@ LABEL_MAP = {
 
 
 def map_label(example):
+    """Convert a single LIAR label from 6 classes into 3 classes."""
     label = example["label"]
 
     if label not in LABEL_MAP:

@@ -77,10 +77,22 @@ This makes uncertainty explicit instead of hidden.
 
 ## 📊 Results (validation subset)
 
-| Model      | Accuracy |
-|------------|----------|
-| Baseline   | ~0.42    |
-| DistilBERT | ~0.59    |
+## 🧪 Example Output
+
+Example prediction comparison:
+
+Baseline:
+- label: TRUE
+- confidence: 0.91
+- result: WRONG
+
+DistilBERT:
+- label: FALSE
+- confidence: 0.58
+- result: CORRECT
+
+Insight:
+Higher confidence does not guarantee correctness.
 
 ### Key insight
 

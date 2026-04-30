@@ -38,7 +38,7 @@ debug-data:
 	python -m src.pipeline.debug_data
 
 lint:
-	-pylint src
+	ruff check src tests
 
 format:
 	black .
@@ -48,4 +48,4 @@ format-check:
 
 check: format-check lint test
 
-pipeline: check data baselinepipeline distilbertpipeline
+pipeline: format-check lint test data baseline distilbert

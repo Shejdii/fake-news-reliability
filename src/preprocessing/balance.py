@@ -1,8 +1,11 @@
+"""Utilities for balancing class distributions in Hugging Face datasets."""
+
 import random
 from collections import defaultdict
 
 
 def balance_dataset(dataset, label_column="label", target_count=None, seed=42):
+    """Downsample dataset classes to a shared target count."""
     label_to_indices = defaultdict(list)
 
     for idx, label in enumerate(dataset[label_column]):
@@ -16,7 +19,7 @@ def balance_dataset(dataset, label_column="label", target_count=None, seed=42):
     random.seed(seed)
     balanced_indices = []
 
-    for _, indices in label_to_indices.items():
+    for indices in label_to_indices.values():
         if len(indices) > target_count:
             sampled = random.sample(indices, target_count)
         else:

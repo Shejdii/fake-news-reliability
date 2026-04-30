@@ -1,11 +1,9 @@
 import joblib
-import numpy as np
 from sklearn.metrics import accuracy_score, f1_score
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from src.confidence.baseline_confidence import predict_with_confidence_baseline
 from src.confidence.distilbert_confidence import predict_with_confidence_distilbert
-from src.confidence.utils import get_confidence_band
 from src.data.load_data import load_fake_news_data
 from src.features.baseline_features import transform_texts_with_vectorizer
 from src.preprocessing.preprocess import preprocess_dataset
