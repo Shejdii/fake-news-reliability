@@ -55,11 +55,13 @@ All experiments are tracked with MLflow.
 
 Each prediction returns:
 
+```json
 {
   "label": "TRUE",
   "confidence": 0.52,
   "band": "fairly_sure"
 }
+```
 
 Confidence is mapped into bands:
 
@@ -108,10 +110,12 @@ Main steps:
 
 Run:
 
+```bash
 make pipeline
 make demo-confidence
 make compare-confidence
 make test
+```
 
 ---
 
