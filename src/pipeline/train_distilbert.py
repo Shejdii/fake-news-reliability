@@ -1,12 +1,26 @@
+import os
+import warnings
+
 import mlflow
 import numpy as np
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from transformers import DataCollatorWithPadding, Trainer, TrainingArguments
+from transformers import logging as transformers_logging
 
 from src.data.load_data import load_fake_news_data
 from src.models.distilbert_model import get_distilbert_model_and_tokenizer
 from src.preprocessing.balance import balance_dataset
 from src.preprocessing.preprocess import preprocess_dataset
+
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+warnings.filterwarnings(
+    "ignore",
+    message="'pin_memory' argument is set as true but no accelerator is found.*",
+)
+
+transformers_logging.set_verbosity_error()
 
 
 def compute_metrics(eval_pred):
@@ -87,7 +101,10 @@ def train():
         load_best_model_at_end=True,
         metric_for_best_model="macro_f1",
         greater_is_better=True,
-        report_to="none",
+        report_to=[],
+        disable_tqdm=True,
+        logging_strategy="no",
+        logging_steps=0,
     )
 
     trainer = Trainer(
@@ -124,10 +141,28 @@ def train():
             }
         )
 
+        print("\n=== DISTILBERT RESULTS ===")
+        print(f"Accuracy: {metrics['eval_accuracy']:.4f}")
+        print(f"F1 macro: {metrics['eval_macro_f1']:.4f}")
+        print(f"F1 weighted: {metrics['eval_weighted_f1']:.4f}")
+        print(f"Precision macro: {metrics['eval_precision_macro']:.4f}")
+        print(f"Recall macro: {metrics['eval_recall_macro']:.4f}")
+
+        print("\n=== TRAINING INFO ===")
+        print("Model: distilbert-base-uncased")
+        print("Train size: 3000")
+        print("Validation size: 750")
+        print("Epochs: 1")
+        print("Balance target count: 1000")
+
         model_dir = "artifacts/models/distilbert_model"
 
         trainer.save_model(model_dir)
         tokenizer.save_pretrained(model_dir)
+
+        print("\n=== SAVED ARTIFACTS ===")
+        print(f"Model saved to: {model_dir}")
+        print(f"Tokenizer saved to: {model_dir}")
 
 
 if __name__ == "__main__":
